@@ -21,11 +21,11 @@ const Navbar = () => {
           Events
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink to="/post-event" className={({ isActive }) => isActive ? "text-primary font-bold" : ""}>
           Post Event
         </NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink to="/contact-us" className={({ isActive }) => isActive ? "text-primary font-bold" : ""}>
           Contact Us

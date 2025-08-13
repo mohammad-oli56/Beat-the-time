@@ -48,7 +48,7 @@ const SideNav = () => {
             <hr className='border border-black border-dashed' />
             <div className='mt-10 space-y-1.5'>
                  <NavLink
-                to="/dashbord/profile"
+                to="/dashboard"
                 className="flex items-center p-3 w-full text-left bg-white border-none text-black"
             >
                 <FaUser className="mr-3 text-lg" /> {/* Profile icon */}

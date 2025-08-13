@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 
 const Event = () => {
@@ -53,52 +54,17 @@ const Event = () => {
               {/* Event Details */}
               <div className="p-4">
                 <h2 className="text-xl font-bold mb-2">{event.eventName}</h2>
-                <p className="text-sm text-gray-500 mb-1">
-                  Type: <span className="font-medium">{event.eventType}</span>
-                </p>
-                <p className="text-sm text-gray-500 mb-1">
-                  📅 {event.eventDate} | 🕒 {event.eventTime}
-                </p>
-                <p className="text-sm text-gray-500 mb-2">
-                  📍{" "}
-                  <a
-                    href={event.mapLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-blue-500 hover:underline"
-                  >
-                    {event.location}
-                  </a>
-                </p>
-                <p className="text-sm text-gray-500 mb-2">
-                  👤 {event.creatorName} ({event.creatorEmail})
-                </p>
+               
                 <p className="text-sm text-gray-500 mb-2">
                   Max Participants: {event.maxParticipants}
                 </p>
-
-                {/* Status Badge */}
-                <span
-                  className={`inline-block px-3 py-1 text-xs font-semibold rounded-full mb-3 ${
-                    event.status === "Pending Approval"
-                      ? "bg-yellow-100 text-yellow-700"
-                      : event.status === "Approved"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
-                  }`}
-                >
-                  {event.status}
-                </span>
-
-                {/* Description */}
-                <p className="text-gray-700 text-sm mb-4 line-clamp-3">
-                  {event.description}
-                </p>
-
+               
                 {/* Action Button */}
+               <Link to={`/details/${event._id}`}>
                 <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all duration-300">
                   View Details
                 </button>
+               </Link>
               </div>
             </div>
           ))}

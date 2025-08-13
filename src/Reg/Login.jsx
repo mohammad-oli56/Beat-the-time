@@ -41,6 +41,10 @@ const Login = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
+
+
+        // console.log(email,password)
+
         uselogin(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
