@@ -17,7 +17,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/events" className={({ isActive }) => isActive ? "text-primary font-bold" : ""}>
+        <NavLink to="/allevent" className={({ isActive }) => isActive ? "text-primary font-bold" : ""}>
           Events
         </NavLink>
       </li>

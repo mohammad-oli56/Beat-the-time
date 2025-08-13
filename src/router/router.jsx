@@ -8,6 +8,7 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import Profile from "../component/Profile";
 import CreatEven from "../component/CreatEven";
 import Event from "../component/Event";
+import All_event from "../component/All_event";
 
 
 export const router = createBrowserRouter([
@@ -19,6 +20,11 @@ export const router = createBrowserRouter([
         index: true,          // index route does NOT have path
         element: <Home />,
       },
+      {
+        path:'allevent',
+        element:<All_event></All_event>,
+         loader: () => fetch("http://localhost:3000/alleven")
+      }
     ],
   },
   {
