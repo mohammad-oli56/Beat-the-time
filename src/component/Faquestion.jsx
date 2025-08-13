@@ -2,31 +2,32 @@ import React, { useState } from "react";
 
 const faqData = [
     {
-        question: "What is the best way to study online?",
+        question: "How can I explore upcoming events?",
         answer:
-            "The best way is to follow a daily routine, take notes actively, and minimize distractions for better focus.",
+            "You can browse upcoming events on our platform by date, category, or location to find the ones that interest you.",
     },
     {
-        question: "Can I access courses after purchase?",
+        question: "Can I register for an event after exploring it?",
         answer:
-            "Yes, all purchased courses will be available in your dashboard to watch anytime, from any device.",
+            "Yes, once you find an event you like, you can register directly from the event page using a simple signup process.",
     },
     {
-        question: "Are certificates provided after completion?",
+        question: "Are there any fees for attending events?",
         answer:
-            "Yes, a professional, downloadable certificate will be awarded once you finish all lessons and pass the final quiz.",
+            "Some events are free, while others require a ticket purchase. All fee details are clearly displayed on the event page.",
     },
     {
-        question: "Can I study on mobile devices?",
+        question: "Can I attend events using my mobile device?",
         answer:
-            "Absolutely! Our platform is fully responsive, allowing you to study on phones, tablets, or laptops with ease.",
+            "Absolutely! Our platform is fully responsive, so you can explore and register for events using your phone, tablet, or laptop.",
     },
     {
-        question: "What should I do if I face technical issues?",
+        question: "What should I do if I face issues while registering for an event?",
         answer:
-            "You can contact our support team 24/7 via email or live chat. Most issues are resolved within a few hours.",
+            "You can contact our support team 24/7 via email or live chat. Most registration issues are resolved quickly.",
     },
 ];
+
 
 const Faquestion = () => {
     const [openIndex, setOpenIndex] = useState(null);

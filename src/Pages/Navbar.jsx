@@ -31,11 +31,15 @@ const Navbar = () => {
           Contact Us
         </NavLink>
       </li>
-      <li>
+      {
+        userprofile?.email && (
+          <li>
         <NavLink to="/dashboard" className={({ isActive }) => isActive ? "text-primary font-bold" : ""}>
           Dashboard
         </NavLink>
       </li>
+        )
+      }
     </>
   );
 
@@ -46,7 +50,7 @@ const Navbar = () => {
         {/* Mobile Menu */}
         <div className="dropdown lg:hidden">
           <label tabIndex={0} className="btn btn-ghost">
-           
+
           </label>
           <ul
             tabIndex={0}
@@ -73,43 +77,43 @@ const Navbar = () => {
       </div>
 
       {/* Right End: Profile or Login */}
-     <div className="navbar-end  ">
-                    {!userprofile?.email ? (
-                        <>
-                            <Link to="/login" className="btn">Login</Link>
-                            <Link to="/signup" className="btn">Sign-up</Link>
-                        </>
-                    ) : (
-                        <>
-                            {/* Profile Avatar with Hover Dropdown */}
-                            <div className="relative group pr-3">
-                                <div className="btn btn-ghost btn-circle avatar">
-                                    <div className="w-10 h-10 rounded-full overflow-hidden ring ring-blue-500 ring-offset-base-100 ring-offset-2">
-                                        <img
-                                            src={userprofile?.photoURL || 'https://via.placeholder.com/40'}
-                                            alt="user"
-                                            className="object-cover w-full h-full"
-                                        />
-                                    </div>
-                                </div>
-                                <ul className="menu menu-sm absolute right-0 bg-base-100 text-green-700 rounded-box z-10 mt-3 w-72 p-2 shadow opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200">
-                                    <li><span><strong>Email:  </strong> {userprofile?.email}</span></li>
-                                    <li><span><strong>Name:</strong> {userprofile?.displayName || 'No Name'}</span></li>
-                                    {/* <li><span><strong>Bookings:  </strong> {books}</span></li>
-                                    <li><span><strong>My-events:  </strong> {myevents}</span></li> */}
-                                </ul>
-                            </div>
-
-                            <button
-                                onClick={handelLogout}
-                                className="btn btn-warning"
-                            >
-                                Sign-out
-                            </button>
-                        </>
-                    )}
-
+      <div className="navbar-end  ">
+        {!userprofile?.email ? (
+          <>
+            <Link to="/login" className="btn">Login</Link>
+            <Link to="/signup" className="btn">Sign-up</Link>
+          </>
+        ) : (
+          <>
+            {/* Profile Avatar with Hover Dropdown */}
+            <div className="relative group pr-3">
+              <div className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 h-10 rounded-full overflow-hidden ring ring-blue-500 ring-offset-base-100 ring-offset-2">
+                  <img
+                    src={userprofile?.photoURL || 'https://via.placeholder.com/40'}
+                    alt="user"
+                    className="object-cover w-full h-full"
+                  />
                 </div>
+              </div>
+              <ul className="menu menu-sm absolute right-0 bg-base-100 text-green-700 rounded-box z-10 mt-3 w-72 p-2 shadow opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200">
+                <li><span><strong>Email:  </strong> {userprofile?.email}</span></li>
+                <li><span><strong>Name:</strong> {userprofile?.displayName || 'No Name'}</span></li>
+                {/* <li><span><strong>Bookings:  </strong> {books}</span></li>
+                                    <li><span><strong>My-events:  </strong> {myevents}</span></li> */}
+              </ul>
+            </div>
+
+            <button
+              onClick={handelLogout}
+              className="btn btn-warning"
+            >
+              Sign-out
+            </button>
+          </>
+        )}
+
+      </div>
     </div>
   );
 };
