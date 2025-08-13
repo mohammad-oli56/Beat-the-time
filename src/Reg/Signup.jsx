@@ -3,44 +3,51 @@ import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { sendEmailVerification } from "firebase/auth";
 
 const Signup = () => {
     const { signup, google } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-   const handleSignup = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const { username, email, password, photo } = Object.fromEntries(formData.entries());
+    const handleSignup = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const { username, email, password, photo } = Object.fromEntries(formData.entries());
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
-    if (!passwordRegex.test(password)) {
-        toast.error("Password must contain at least 6 characters, including uppercase, lowercase, and a number.");
-        return;
-    }
+        // Password validation
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+        if (!passwordRegex.test(password)) {
+            toast.error("Password must contain at least 6 characters, including uppercase, lowercase, and a number.");
+            return;
+        }
 
-    try {
-        // Step 1: Sign up with Firebase/AuthContext
-        await signup(email, password);
+        try {
+            // Step 1: Sign up with Firebase/AuthContext
+            const userCredential = await signup(email, password);
+            const user = userCredential.user;
 
-        // Step 2: Save to MongoDB
-        await fetch("http://localhost:3000/users", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                name: username,
-                email,
-                photo,
-            }),
-        });
+            // Step 2: Send email verification
+            await sendEmailVerification(user);
+            toast.success("Verification email sent! Please check your inbox.");
 
-        toast.success("Signed up successfully");
-        navigate("/");
-    } catch (error) {
-        toast.error(error.message || "Signup failed");
-    }
-};
+            // Step 3: Save user to MongoDB
+            await fetch("http://localhost:3000/users", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: username,
+                    email,
+                    photo,
+                }),
+            });
+
+            // Navigate to login page
+            navigate("/");
+        } catch (error) {
+            toast.error(error.message || "Signup failed");
+        }
+    };
 
     const handleGoogle = () => {
         google()

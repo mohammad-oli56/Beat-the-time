@@ -12,6 +12,7 @@ import All_event from "../component/All_event";
 import Event_details from "../component/Event_details";
 import ContactSupport from "../component/ContactSupport";
 import Mybookings from "../component/Mybookings";
+import Myevents from "../component/Myevents";
 // import Mybookings from "../component/Mybookings";
 
 
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
         element: <Mybookings></Mybookings>,
         loader: () => fetch("http://localhost:3000/getbooking")
 
+      },
+      {
+        path:'/dashboard/myevent',
+        element:<Myevents></Myevents>
       },
       {
         path: '/dashboard/createven',

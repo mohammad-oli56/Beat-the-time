@@ -33,7 +33,7 @@ const SideNav = () => {
 
             {/* My Events Link */}
             <NavLink
-                to="/dashbord/myevent"
+                to="/dashboard/myevent"
                 className="flex items-center p-3 w-full text-left  bg-white border-none text-black"
             >
                 <FaCalendarAlt className="mr-3 text-lg" />
