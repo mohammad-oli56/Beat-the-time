@@ -3,6 +3,9 @@ import { NavLink } from 'react-router';
 import { FaHome, FaPlus, FaCalendarAlt, FaTicketAlt, FaHeadset, FaUser } from 'react-icons/fa';
 
 const SideNav = () => {
+
+    
+
     return (
         <div className="space-y-1.5">
             {/* Home Link */}
@@ -39,7 +42,7 @@ const SideNav = () => {
 
             {/* My Bookings Link */}
             <NavLink
-                to="/dashbord/bookings"
+                to="/dashboard/mybooking"
                 className="flex mb-10 items-center p-3 w-full text-left  bg-white border-none text-black"
             >
                 <FaTicketAlt className="mr-3 text-lg" />
@@ -47,13 +50,13 @@ const SideNav = () => {
             </NavLink>
             <hr className='border border-black border-dashed' />
             <div className='mt-10 space-y-1.5'>
-                 <NavLink
-                to="/dashboard"
-                className="flex items-center p-3 w-full text-left bg-white border-none text-black"
-            >
-                <FaUser className="mr-3 text-lg" /> {/* Profile icon */}
-                <span>Profile</span> {/* Profile text */}
-            </NavLink>
+                <NavLink
+                    to="/dashboard/mybooking"
+                    className="flex items-center p-3 w-full text-left bg-white border-none text-black"
+                >
+                    <FaUser className="mr-3 text-lg" /> {/* Profile icon */}
+                    <span>Profile</span> {/* Profile text */}
+                </NavLink>
 
 
                 {/* Support Link */}

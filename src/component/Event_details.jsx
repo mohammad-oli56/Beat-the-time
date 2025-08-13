@@ -1,11 +1,13 @@
 // Event_details.jsx
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Event_details = () => {
     const event = useLoaderData();
     const navigate = useNavigate();
+    const { userprofile } = useContext(AuthContext);
 
     if (!event) {
         return (
@@ -32,7 +34,6 @@ const Event_details = () => {
         createdAt,
     } = event;
 
-    // combine date + time when possible
     let formattedDateTime = "Date/time not provided";
     try {
         if (eventDate && eventTime) {
@@ -47,7 +48,6 @@ const Event_details = () => {
 
     const formattedCreatedAt = createdAt ? new Date(createdAt).toLocaleString() : "—";
 
-    // simple badge color by status (Pending, Approved, Rejected)
     const statusBadge =
         status === "Approved"
             ? "bg-green-100 text-green-800"
@@ -134,7 +134,6 @@ const Event_details = () => {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        {/* You can open the modal using document.getElementById('ID').showModal() method */}
                         <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>
                             Register
                         </button>
@@ -153,28 +152,24 @@ const Event_details = () => {
                                     const form = e.target;
                                     const studentsdata = {
                                         name: form.name.value,
-                                        email: form.email.value,
+                                        email: userprofile?.email || form.email.value,
                                         teamMemberNumber: form.teamMemberNumber.value,
                                         contactMobile: form.contactMobile.value,
-                                        eventiId :_id
+                                        eventiId: _id
                                     };
 
                                     try {
                                         const response = await axios.post('http://localhost:3000/books', studentsdata);
                                         console.log("Server Response:", response.data);
                                         alert("Registration successful!");
+                                        form.reset();
                                         document.getElementById('my_modal_3').close();
-                                        form.reset(); // Optional: clear the form
                                     } catch (error) {
                                         console.error("Error posting data:", error);
                                         alert("Failed to register. Please try again.");
                                     }
 
-
-
                                     console.log("Submitted Data:", studentsdata);
-
-                                    document.getElementById('my_modal_3').close();
                                 }}>
                                     <div className="form-control mb-2">
                                         <label className="label">
@@ -189,6 +184,7 @@ const Event_details = () => {
                                         />
                                     </div>
 
+                                    { !userprofile?.email && (
                                     <div className="form-control mb-2">
                                         <label className="label">
                                             <span className="label-text">Email</span>
@@ -201,6 +197,7 @@ const Event_details = () => {
                                             required
                                         />
                                     </div>
+                                    )}
 
                                     <div className="form-control mb-2">
                                         <label className="label">
@@ -230,8 +227,6 @@ const Event_details = () => {
 
                                     <button type="submit" className="btn btn-primary w-full">Register</button>
                                 </form>
-
-
                             </div>
                         </dialog>
 

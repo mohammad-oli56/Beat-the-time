@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { userprofile, handelLogout } = useContext(AuthContext);
 
-  const handleLogout = () => {
-    logOut().catch(console.error);
-  };
+  // const handleLogout = () => {
+  //   logOut().catch(console.error);
+  // };
 
   const navLinks = (
     <>
@@ -27,7 +27,7 @@ const Navbar = () => {
         </NavLink>
       </li> */}
       <li>
-        <NavLink to="/contact-us" className={({ isActive }) => isActive ? "text-primary font-bold" : ""}>
+        <NavLink to="/contact" className={({ isActive }) => isActive ? "text-primary font-bold" : ""}>
           Contact Us
         </NavLink>
       </li>
@@ -46,9 +46,7 @@ const Navbar = () => {
         {/* Mobile Menu */}
         <div className="dropdown lg:hidden">
           <label tabIndex={0} className="btn btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-            </svg>
+           
           </label>
           <ul
             tabIndex={0}
@@ -60,10 +58,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <NavLink to="/" className="btn btn-ghost normal-case text-xl flex items-center gap-2">
-          <svg width="40" height="40" viewBox="0 0 24 24" className="fill-current text-blue-500">
-            <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="2" fill="none" />
-            <image href="/icon.png" x="6" y="6" width="12" height="12" />
-          </svg>
+          <img className='w-12 rounded-full' src="https://static.vecteezy.com/system/resources/previews/023/335/565/non_2x/sports-event-concept-with-silhouette-athletics-running-cross-ribbon-on-white-background-vector.jpg" alt="" />
           <span className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
             Event Explorer
           </span>
@@ -78,33 +73,43 @@ const Navbar = () => {
       </div>
 
       {/* Right End: Profile or Login */}
-      <div className="navbar-end">
-        {user ? (
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar relative group">
-              <div className="w-10 rounded-full">
-                <img
-                  src={user.photoURL || "https://i.ibb.co/2kRrLqb/default-avatar.png"}
-                  alt="user"
-                />
-              </div>
-              {/* Hover name */}
-              <div className="absolute bottom-[-28px] left-1/2 transform -translate-x-1/2 bg-gray-600 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
-                {user.displayName || "User"}
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li><span className="font-semibold">{user.displayName || "User"}</span></li>
-              <li><button onClick={handleLogout} className="btn btn-sm btn-error text-white">Logout</button></li>
-            </ul>
-          </div>
-        ) : (
-          <NavLink to="/login" className="btn btn-outline btn-sm">Login / Sign up</NavLink>
-        )}
-      </div>
+     <div className="navbar-end  ">
+                    {!userprofile?.email ? (
+                        <>
+                            <Link to="/login" className="btn">Login</Link>
+                            <Link to="/signup" className="btn">Sign-up</Link>
+                        </>
+                    ) : (
+                        <>
+                            {/* Profile Avatar with Hover Dropdown */}
+                            <div className="relative group pr-3">
+                                <div className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 h-10 rounded-full overflow-hidden ring ring-blue-500 ring-offset-base-100 ring-offset-2">
+                                        <img
+                                            src={userprofile?.photoURL || 'https://via.placeholder.com/40'}
+                                            alt="user"
+                                            className="object-cover w-full h-full"
+                                        />
+                                    </div>
+                                </div>
+                                <ul className="menu menu-sm absolute right-0 bg-base-100 text-green-700 rounded-box z-10 mt-3 w-72 p-2 shadow opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200">
+                                    <li><span><strong>Email:  </strong> {userprofile?.email}</span></li>
+                                    <li><span><strong>Name:</strong> {userprofile?.displayName || 'No Name'}</span></li>
+                                    {/* <li><span><strong>Bookings:  </strong> {books}</span></li>
+                                    <li><span><strong>My-events:  </strong> {myevents}</span></li> */}
+                                </ul>
+                            </div>
+
+                            <button
+                                onClick={handelLogout}
+                                className="btn btn-warning"
+                            >
+                                Sign-out
+                            </button>
+                        </>
+                    )}
+
+                </div>
     </div>
   );
 };

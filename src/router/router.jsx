@@ -10,6 +10,9 @@ import CreatEven from "../component/CreatEven";
 import Event from "../component/Event";
 import All_event from "../component/All_event";
 import Event_details from "../component/Event_details";
+import ContactSupport from "../component/ContactSupport";
+import Mybookings from "../component/Mybookings";
+// import Mybookings from "../component/Mybookings";
 
 
 export const router = createBrowserRouter([
@@ -20,6 +23,7 @@ export const router = createBrowserRouter([
       {
         index: true,          // index route does NOT have path
         element: <Home />,
+        loader: () => fetch("http://localhost:3000/alleven")
       },
       {
         path: '/details/:id',
@@ -32,6 +36,10 @@ export const router = createBrowserRouter([
           }
           return res.json(); // <-- return parsed JSON
         },
+      },
+      {
+        path: '/contact',
+        element: <ContactSupport></ContactSupport>
       },
 
       {
@@ -66,9 +74,16 @@ export const router = createBrowserRouter([
 
       },
       {
+        path: '/dashboard/mybooking',
+        element: <Mybookings></Mybookings>,
+        loader: () => fetch("http://localhost:3000/getbooking")
+
+      },
+      {
         path: '/dashboard/createven',
         element: <CreatEven></CreatEven>
       },
+
 
     ]
   },

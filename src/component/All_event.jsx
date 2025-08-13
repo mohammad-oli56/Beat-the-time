@@ -11,7 +11,7 @@ const Event = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/alleven") // আপনার backend API URL
+    fetch("http://localhost:3000/alleven") 
       .then((res) => res.json())
       .then((data) => {
         setEvents(data);

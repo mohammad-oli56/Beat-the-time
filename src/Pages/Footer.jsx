@@ -5,20 +5,18 @@ const Footer = () => {
   return (
     <footer className="bg-gray-100 shadow-inner mt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-        
+
         {/* Logo & About */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <svg width="40" height="40" viewBox="0 0 24 24" className="fill-current text-blue-500">
-              <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="2" fill="none" />
-              <image href="/icon.png" x="6" y="6" width="12" height="12" />
-            </svg>
+            <img className='w-12 rounded-full' src="https://static.vecteezy.com/system/resources/previews/023/335/565/non_2x/sports-event-concept-with-silhouette-athletics-running-cross-ribbon-on-white-background-vector.jpg" alt="" />
+
             <span className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
               Event Explorer
             </span>
           </div>
           <p className="text-gray-600 text-sm">
-            Discover and share amazing events around you.  
+            Discover and share amazing events around you.
             Your gateway to connect, learn, and experience.
           </p>
         </div>
@@ -40,7 +38,7 @@ const Footer = () => {
           <p className="text-gray-600 text-sm">📍 Dhaka, Bangladesh</p>
           <p className="text-gray-600 text-sm">📞 +880 1234 567890</p>
           <p className="text-gray-600 text-sm">✉ support@eventexplorer.com</p>
-          
+
           {/* Social Links */}
           <div className="flex gap-4 mt-4 text-gray-500">
             <a href="#" className="hover:text-blue-500"><FaFacebook size={20} /></a>
